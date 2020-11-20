@@ -1,0 +1,24 @@
+Package: slotR
+Title: slot machine in R
+Version: 0.0.0.9001
+Authors@R: person('Mario', 'De Toma', email = 'mariodetoma.dsp@gmail.com', role = c('cre', 'aut'))
+Description: Slot machine game of chance implemented in R and Shiny.
+License: MIT + file LICENSE
+Imports: 
+    config,
+    golem,
+    shiny,
+    shinyjs,
+    readr,
+    tibble,
+    dplyr,
+    tidyr,
+    purrr,
+    DT,
+    ggplot2,
+    stringr
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Depends: 
+    R (>= 4.00)
