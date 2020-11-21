@@ -2,11 +2,11 @@
 Mario De Toma is a data scientist and a project manager. After years in IT consulting and service corporations, he is now running an independent consulting activity focused on data and R. He is also publishing [Stream of Data Consciousness blog](https://www.mdt-datascience.com/).
 
 ### Acknowleddgments
-Without the "stay at home" directive due to COVID pandemic __slotR__ would have not see the light but it is hard to feel any gratitude for this.
+Without the "stay at home" directive due to COVID pandemic __slotR__ would have not seen the light but it is hard to feel any gratitude for this.
 
 Thanks instead are for R and all people that keep R alive and kicking.
 
-A special thank to Colin Fay and [ThinkR](https://rtask.thinkr.fr) for publishing the `{hexmake}` app that inspired me this _R slot machine_. 
+A special thank to Colin Fay and [ThinkR](https://rtask.thinkr.fr) for publishing the `{hexmake}` app which made me imagine an _R slot machine_. 
 
 ### Colophon 
 

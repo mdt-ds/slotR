@@ -11,6 +11,7 @@ slot_gameUI <- function(id){
   ns <- NS(id)
   tagList(
     shinyjs::useShinyjs(),
+    shinyalert::useShinyalert(),
     # Application title
     fluidRow(
       h1("slot machine R", 
@@ -100,13 +101,10 @@ slot_game_server <- function(id, reel){
                               reel1 = "-", reel2 = "-", reel3 = "-")
   
   
-  reels <- reactive({
-    if (!input$spin) {
-      c("N", "N", "N")
-    } else if (input$spin) {
+  reels <- eventReactive(input$spin, {
       replicate(3, sample(reel(), size = 1))
-      }
-  })
+      }, ignoreNULL = FALSE
+  )
   
   reels_tbl <- reactive({
     reels_tbl <- tibble::tibble(reel1 = symbols$img[symbols$id == reels()[1]], 
@@ -117,19 +115,25 @@ slot_game_server <- function(id, reel){
   
   observeEvent(input$ask, {
     if (money$debt == 0) {
-      shinyjs::alert("you're getting into debt!")
+      shinyalert::shinyalert(title = "debt alert",
+                             text = "you're getting into debt \n for the first time!", 
+                             type = "warning", size = "xs")
       money$credit <- 1000
       money$debt <- money$debt + 1
       shinyjs::enable("spin")
       shinyjs::disable("ask")
       } else if (money$debt == 1){
-      shinyjs::alert("you're getting into debt!")
+      shinyalert::shinyalert(title = "debt alert",
+                             text = "you're getting into debt \n for the second time!", 
+                              type = "warning", size = "xs")
       money$credit <- 500
       money$debt <- money$debt + 1
       shinyjs::enable("spin")
       shinyjs::disable("ask")
     } else if (money$debt == 2){
-      shinyjs::alert("if you don't learn Python you can't get credit anymore!")
+      shinyalert::shinyalert(title = "no more credit",
+                             text = "if you don't learn Python \n you can't get credit anymore!", 
+                             type = "error", size = "xs")
       shinyjs::disable("ask")
     }
   })
@@ -170,6 +174,10 @@ slot_game_server <- function(id, reel){
       pay <-  x * money$bet
       if ((money$credit + pay) < 0) {
         money$credit = 0
+        shinyalert::shinyalert(title = "no money, \n no game",
+                               type = "warning", size = "xs")
+        shinyjs::disable("spin")
+        shinyjs::enable("ask")
       } else {
         money$credit <- money$credit + pay
       }
@@ -183,11 +191,7 @@ slot_game_server <- function(id, reel){
       # set BET to 10% of credit
       money$bet <- round(money$credit * 0.1, -2)
       if (money$bet==0) {money$bet <- 100}
-      } else {
-      shinyjs::alert("no money, no game!")
-      shinyjs::disable("spin")
-      shinyjs::enable("ask")
-    }
+      }
   })
   
   output$reels <- DT::renderDataTable(reels_tbl(), 

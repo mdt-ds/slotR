@@ -31,19 +31,19 @@ pay_tbl <- dplyr::as_tibble(pay_tbl) %>%
 symbols <- tibble::tibble(id = c("R", "P", "L", "S", "A", "N", "I"),
                           img = c('<img src = "www/R_logo.png" ></img>',
                                   '<img src = "www/Python_logo.png" ></img>',
-                                  '<img src = "www/hex-Package.png" ></img>',
-                                  '<img src = "www/hex-Shiny_App.png" ></img>',
-                                  '<img src = "www/hex-Analysis.png" ></img>',
+                                  '<img src = "www/hex-package.png" ></img>',
+                                  '<img src = "www/hex-shiny_app.png" ></img>',
+                                  '<img src = "www/hex-analysis.png" ></img>',
                                   '<img src = "www/hex-NA.png" ></img>',
-                                  '<img src = "www/hex-Insight.png" ></img>'))
+                                  '<img src = "www/hex-insight.png" ></img>'))
 
 ## table to display payout rules
 payout <- tibble::tibble(symbol = c('<img src = "www/R_logo.png" width = "32px"></img>',
                                   '<img src = "www/Python_logo.png" width = "32px"></img>',
-                                  '<img src = "www/hex-Analysis.png" width = "32px"></img>',
-                                  '<img src = "www/hex-Insight.png" width = "32px"></img>',
-                                  '<img src = "www/hex-Package.png" width = "32px"></img>',
-                                  '<img src = "www/hex-Shiny_App.png" width = "32px"></img>',
+                                  '<img src = "www/hex-analysis.png" width = "32px"></img>',
+                                  '<img src = "www/hex-insight.png" width = "32px"></img>',
+                                  '<img src = "www/hex-package.png" width = "32px"></img>',
+                                  '<img src = "www/hex-shiny_app.png" width = "32px"></img>',
                                   '<img src = "www/hex-NA.png" width = "32px"></img>'),
                          x1 =c(2,-2,0,0,0,0,-1),
                          x2 =c(4,-4,2,2,2,2,-2),

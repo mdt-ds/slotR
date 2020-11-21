@@ -15,7 +15,7 @@ app_ui <- function(request) {
     navbarPage(title = "slotR: Slot Machine R", windowTitle = "slotR",
                inverse = TRUE, 
                footer = tagList(includeHTML(app_sys("app/www/include_footer.html")),
-                         includeScript(path = app_sys("app/js/myscript.js"))),
+                         includeScript(path = app_sys("app/js/disclaimer.js"))),
       tabPanel("play", 
                slot_gameUI("slot_game_0")),
       tabPanel("config",

@@ -1,6 +1,6 @@
-#' Run the Shiny Application
+#' Run the slotR Shiny Application
 #'
-#' @param ... A series of options to be used inside the app.
+#' @description slotR: a slot machine game of chance inspired by R.
 #'
 #' @export
 #' @importFrom shiny shinyApp

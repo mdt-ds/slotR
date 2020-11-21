@@ -29,31 +29,34 @@ slot_analysisUI <- function(id){
 #' @param game_data get a game data table as a reactive expression
 #'
 #' @noRd 
+#' 
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
 slot_analysis_server <- function(id, game_data){
   moduleServer(id,
   function(input, output, session){
   ns <- session$ns
  
-  game_tbl <- reactive(game_data() %>% 
-                         dplyr::mutate(across(starts_with("reel"), 
+  game_tbl <- reactive(game_data() %>%  
+                         dplyr::mutate(dplyr::across(starts_with("reel"), 
                                               ~stringr::str_replace(string = .x, pattern = "R", 
                                   replacement = '<img src = "www/R_logo.png" width = "32px"></img>'))) %>%
-                         dplyr::mutate(across(starts_with("reel"), 
+                         dplyr::mutate(dplyr::across(starts_with("reel"), 
                                               ~stringr::str_replace(string = .x, pattern = "P", 
                                   replacement = '<img src = "www/Python_logo.png" width = "32px"></img>'))) %>%
-                         dplyr::mutate(across(starts_with("reel"), 
+                         dplyr::mutate(dplyr::across(starts_with("reel"), 
                                               ~stringr::str_replace(string = .x, pattern = "A", 
-                                  replacement = '<img src = "www/hex-Analysis.png" width = "32px"></img>'))) %>%
-                         dplyr::mutate(across(starts_with("reel"), 
+                                  replacement = '<img src = "www/hex-analysis.png" width = "32px"></img>'))) %>%
+                         dplyr::mutate(dplyr::across(starts_with("reel"), 
                                               ~stringr::str_replace(string = .x, pattern = "I", 
-                                  replacement = '<img src = "www/hex-Insight.png" width = "32px"></img>'))) %>%
-                         dplyr::mutate(across(starts_with("reel"), 
+                                  replacement = '<img src = "www/hex-insight.png" width = "32px"></img>'))) %>%
+                         dplyr::mutate(dplyr::across(starts_with("reel"), 
                                               ~stringr::str_replace(string = .x, pattern = "L", 
-                                  replacement = '<img src = "www/hex-Package.png" width = "32px"></img>'))) %>%
-                         dplyr::mutate(across(starts_with("reel"), 
+                                  replacement = '<img src = "www/hex-package.png" width = "32px"></img>'))) %>%
+                         dplyr::mutate(dplyr::across(starts_with("reel"), 
                                               ~stringr::str_replace(string = .x, pattern = "S", 
-                                  replacement = '<img src = "www/hex-Shiny_App.png" width = "32px"></img>'))) %>%
-                         dplyr::mutate(across(starts_with("reel"), 
+                                  replacement = '<img src = "www/hex-shiny_app.png" width = "32px"></img>'))) %>%
+                         dplyr::mutate(dplyr::across(starts_with("reel"), 
                                               ~stringr::str_replace(string = .x, pattern = "N", 
                                   replacement = '<img src = "www/hex-NA.png" width = "32px"></img>')))
                       )

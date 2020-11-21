@@ -16,7 +16,7 @@
 ## Dependencies ----
 ## Add one line by package you want to add as dependency
 usethis::use_package( "shinyjs" )
-usethis::use_package( "shinythemes" )
+usethis::use_package( "shinyalert" )
 usethis::use_package( "readr" )
 usethis::use_package( "tibble" )
 usethis::use_package( "dplyr" )
@@ -25,6 +25,7 @@ usethis::use_package( "purrr" )
 usethis::use_package( "stringr" )
 usethis::use_package( "ggplot2" )
 usethis::use_package( "DT" )
+usethis::use_pipe()
 
 ## Add modules ----
 ## Create a module infrastructure in R/

@@ -32,11 +32,16 @@ slot_configUI <- function(id){
        tags$h4("slotR probabilities"),
        DT::dataTableOutput(outputId = ns("probs")),
        br(),
-       actionButton(inputId = ns("chgReel"), label = "change the reel")
-       )
-    ))
+       fluidRow(
+         actionButton(inputId = ns("configuredReel"), 
+                      label = "configured reel", icon = icon("cog")),
+         actionButton(inputId = ns("chgReel"), 
+                      label = "change the reel", icon = icon("sliders-h"))
+                )
+      )
+    )
   )
-}
+)}
     
 #' slot_config Server Function
 #'
@@ -57,10 +62,10 @@ slot_config_server <- function(id){
   probs_tbl <- reactive({
     ptbl <- tibble::tibble(symbol = c('<img src = "www/R_logo.png" width = "32px"></img>',
                               '<img src = "www/Python_logo.png" width = "32px"></img>',
-                              '<img src = "www/hex-Analysis.png" width = "32px"></img>',
-                              '<img src = "www/hex-Insight.png" width = "32px"></img>',
-                              '<img src = "www/hex-Package.png" width = "32px"></img>',
-                              '<img src = "www/hex-Shiny_App.png" width = "32px"></img>',
+                              '<img src = "www/hex-analysis.png" width = "32px"></img>',
+                              '<img src = "www/hex-insight.png" width = "32px"></img>',
+                              '<img src = "www/hex-package.png" width = "32px"></img>',
+                              '<img src = "www/hex-shiny_app.png" width = "32px"></img>',
                               '<img src = "www/hex-NA.png" width = "32px"></img>'),
                               x0 =c((reel_stops()-input$Rs)^3/slot_combos(),
                                     (reel_stops()-input$Ps)^3/slot_combos(),
@@ -98,34 +103,55 @@ slot_config_server <- function(id){
   
   
   # store and return configured reel
-  reel <- reactive({
-    if (!input$chgReel) {
-      rep(x = c("R", "I", "A", "L", "S", "N", "P"),
-          times = c(1, 3, 3, 3, 3, 5, 1))
-    } else if (input$chgReel) {
-      rep(x = c("R", "I", "A", "L", "S", "N", "P"),
-          times = c(input$Rs, input$hex, input$hex, input$hex, input$hex, input$NAs, input$Ps))
-    } 
+  reel <- eventReactive(input$chgReel, {
+    rep(x = c("R", "I", "A", "L", "S", "N", "P"),
+        times = c(input$Rs, input$hex, input$hex, input$hex, input$hex, input$NAs, input$Ps))
+  }, ignoreNULL = FALSE)
+  
+  observeEvent(input$configuredReel, {
+    reel_display <- tibble::tibble(symbol = c('<img src = "www/R_logo.png" width = "32px"></img>',
+                                              '<img src = "www/Python_logo.png" width = "32px"></img>',
+                                              '<img src = "www/hex-analysis.png" width = "32px"></img>',
+                                              '<img src = "www/hex-insight.png" width = "32px"></img>',
+                                              '<img src = "www/hex-package.png" width = "32px"></img>',
+                                              '<img src = "www/hex-shiny_app.png" width = "32px"></img>',
+                                              '<img src = "www/hex-NA.png" width = "32px"></img>'),
+                                   stops = c(sum(stringr::str_count(string = reel(), pattern = "R")), 
+                                             sum(stringr::str_count(string = reel(), pattern = "P")), 
+                                             sum(stringr::str_count(string = reel(), pattern = "A")), 
+                                             sum(stringr::str_count(string = reel(), pattern = "I")), 
+                                             sum(stringr::str_count(string = reel(), pattern = "L")),
+                                             sum(stringr::str_count(string = reel(), pattern = "S")), 
+                                             sum(stringr::str_count(string = reel(), pattern = "N"))))
+    
+    showModal(modalDialog(title = "current reel configuration",
+                          helpText("all 3 reels now have the following quantities of stops."),
+                          DT::renderDataTable(reel_display, 
+                                              options = list(dom = 't', 
+                                                             columnDefs=list(list(targets=2, class="dt-center"))),
+                                              escape = FALSE)))
   })
   
   observeEvent(input$chgReel, {
     reel_display <- tibble::tibble(symbol = c('<img src = "www/R_logo.png" width = "32px"></img>',
                                               '<img src = "www/Python_logo.png" width = "32px"></img>',
-                                              '<img src = "www/hex-Analysis.png" width = "32px"></img>',
-                                              '<img src = "www/hex-Insight.png" width = "32px"></img>',
-                                              '<img src = "www/hex-Package.png" width = "32px"></img>',
-                                              '<img src = "www/hex-Shiny_App.png" width = "32px"></img>',
+                                              '<img src = "www/hex-analysis.png" width = "32px"></img>',
+                                              '<img src = "www/hex-insight.png" width = "32px"></img>',
+                                              '<img src = "www/hex-package.png" width = "32px"></img>',
+                                              '<img src = "www/hex-shiny_app.png" width = "32px"></img>',
                                               '<img src = "www/hex-NA.png" width = "32px"></img>'),
                                    stops = c(input$Rs, input$Ps, input$hex, input$hex, input$hex, input$hex, input$NAs))
     
-    showModal(modalDialog(title = "reel configuration",
-                          helpText("All 3 reels now have the following quantities of stops."),
+    showModal(modalDialog(title = "reel configuration changed",
+                          helpText("all 3 reels now have the following quantities of stops."),
                           DT::renderDataTable(reel_display, 
                                               options = list(dom = 't', 
                                                              columnDefs=list(list(targets=2, class="dt-center"))),
                                               escape = FALSE)))
   })
     
+  output$reel_txt <- renderText(paste(reel(), "-"))
+  
     return(reel)
   })}
 
