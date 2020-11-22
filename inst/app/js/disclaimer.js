@@ -1,3 +1,4 @@
+// script for highlighting the footer disclaimer on mouseover
 const dp = document.querySelectorAll(".disclaimer");
 console.log(dp);
 let i;
