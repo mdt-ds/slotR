@@ -138,7 +138,7 @@ slot_game_server <- function(id, reel) {
                    reel3 = "-"
                  )
                  
-                 
+                 set.seed(as.integer(Sys.time()))
                  reels <- eventReactive(input$spin, {
                    replicate(3, sample(reel(), size = 1))
                  }, ignoreNULL = FALSE)
@@ -180,7 +180,7 @@ slot_game_server <- function(id, reel) {
                      shinyalert::shinyalert(
                        title = "no more credit",
                        text = "if you don't learn Python \n you can't get credit anymore!",
-                       type = "error",
+                       type = "error", 
                        size = "xs"
                      )
                      shinyjs::disable("ask")
@@ -254,7 +254,8 @@ slot_game_server <- function(id, reel) {
                        if (money$credit >= 30000) {
                          shinyalert::shinyalert(title = "you win",
                                                 text = "you aRe so lucky! \n or you aRe setting probabilities right ...", 
-                                                type = "success",
+                                                type = "success", 
+                                                imageUrl = "www/R_logo.png",
                                                 size = "xs")
                          shinyjs::disable("spin")
                          shinyjs::disable("ask")
