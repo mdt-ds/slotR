@@ -7,6 +7,7 @@
 
 slotR is a Slot machine game of chance implemented in R and Shiny.
 
+
 ## Installation
 
 You can install the released version of slotR from [GitHub](https://github.com/) with:
