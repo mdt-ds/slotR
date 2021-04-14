@@ -38,7 +38,7 @@ slot_analysis_server <- function(id, game_data) {
                  game_tbl <- reactive(
                    game_data() %>%
                      dplyr::mutate(dplyr::across(
-                       starts_with("reel"),
+                       dplyr::starts_with("reel"),
                        ~ stringr::str_replace(
                          string = .x,
                          pattern = "R",
@@ -46,7 +46,7 @@ slot_analysis_server <- function(id, game_data) {
                        )
                      )) %>%
                      dplyr::mutate(dplyr::across(
-                       starts_with("reel"),
+                       dplyr::starts_with("reel"),
                        ~ stringr::str_replace(
                          string = .x,
                          pattern = "P",
@@ -54,7 +54,7 @@ slot_analysis_server <- function(id, game_data) {
                        )
                      )) %>%
                      dplyr::mutate(dplyr::across(
-                       starts_with("reel"),
+                       dplyr::starts_with("reel"),
                        ~ stringr::str_replace(
                          string = .x,
                          pattern = "A",
@@ -62,7 +62,7 @@ slot_analysis_server <- function(id, game_data) {
                        )
                      )) %>%
                      dplyr::mutate(dplyr::across(
-                       starts_with("reel"),
+                       dplyr::starts_with("reel"),
                        ~ stringr::str_replace(
                          string = .x,
                          pattern = "I",
@@ -70,7 +70,7 @@ slot_analysis_server <- function(id, game_data) {
                        )
                      )) %>%
                      dplyr::mutate(dplyr::across(
-                       starts_with("reel"),
+                       dplyr::starts_with("reel"),
                        ~ stringr::str_replace(
                          string = .x,
                          pattern = "L",
@@ -78,7 +78,7 @@ slot_analysis_server <- function(id, game_data) {
                        )
                      )) %>%
                      dplyr::mutate(dplyr::across(
-                       starts_with("reel"),
+                       dplyr::starts_with("reel"),
                        ~ stringr::str_replace(
                          string = .x,
                          pattern = "S",
@@ -86,7 +86,7 @@ slot_analysis_server <- function(id, game_data) {
                        )
                      )) %>%
                      dplyr::mutate(dplyr::across(
-                       starts_with("reel"),
+                       dplyr::starts_with("reel"),
                        ~ stringr::str_replace(
                          string = .x,
                          pattern = "N",
