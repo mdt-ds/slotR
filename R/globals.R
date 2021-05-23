@@ -1,0 +1,1 @@
+utils::globalVariables(c("credit", "reel1", "reel2", "reel3"))

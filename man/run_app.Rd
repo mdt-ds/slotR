@@ -4,7 +4,10 @@
 \alias{run_app}
 \title{Run the slotR Shiny Application}
 \usage{
-run_app(...)
+run_app(R)
+}
+\arguments{
+\item{R}{NULL parameter to pass CMD check}
 }
 \description{
 slotR: a slot machine game of chance inspired by R.
