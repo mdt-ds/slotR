@@ -7,6 +7,10 @@
 #' @export
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
+#' @example 
+#' \dontrun{
+#' run_app()
+#' }
 run_app <- function(R) {
   with_golem_options(
     app = shinyApp(
