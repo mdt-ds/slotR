@@ -1,5 +1,5 @@
 Package: slotR
-Title: slot machine in R
+Title: Slot Machine in R
 Version: 0.0.1
 Authors@R: person('Mario', 'De Toma', email = 'mariodetoma.dsp@gmail.com', role = c('cre', 'aut'))
 Description: Slot machine game of chance implemented in R and Shiny.
