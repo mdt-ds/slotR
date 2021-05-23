@@ -27,3 +27,9 @@ Depends:
     R (>= 4.00)
 URL: https://github.com/mdt-ds/slotR
 BugReports: https://github.com/mdt-ds/slotR/issues
+Suggests: 
+    rmarkdown,
+    knitr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
